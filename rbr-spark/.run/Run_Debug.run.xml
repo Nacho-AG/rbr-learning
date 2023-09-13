@@ -9,7 +9,7 @@
     <option name="INCLUDE_PROVIDED_SCOPE" value="true" />
     <option name="MAIN_CLASS_NAME" value="com.nachoag.App" />
     <module name="rbr-spark" />
-    <option name="PROGRAM_PARAMETERS" value="-p &quot;SessionConfiguration&quot;" />
+    <option name="PROGRAM_PARAMETERS" value="-p &quot;DataFrameCreation&quot;" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>
