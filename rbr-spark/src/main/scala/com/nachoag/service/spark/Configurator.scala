@@ -11,4 +11,15 @@ object Configurator {
 
     (numWorkers * numProcessors).max(numProcessors)
   }
+
+  def getPartitions: Long = getSparkConf("spark.sql.shuffle.partitions").toLong
+
+  def getMaxPartitionBytes: Long = getSparkConf("spark.sql.files.maxPartitionBytes").toLong
+
+  def getMaxBytesInDriver: Long = getSparkConf("spark.driver.maxResultSize").toLong
+
+  def getSerializer: String = getSparkConf("spark.serializer")
+
+  private def getSparkConf(property: String): String = Session.getSession.sparkContext.getConf.get(property)
+  
 }
