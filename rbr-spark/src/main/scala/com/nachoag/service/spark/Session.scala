@@ -14,7 +14,6 @@ object Session {
   }
 
   private def getMaster: String = {
-    println(System.getenv("SPARK_CONF_DIR"))
     val env = System.getenv("environment")
     if (env == Environment.Local.env) Master.Local.master
     else Master.Cluster.master
