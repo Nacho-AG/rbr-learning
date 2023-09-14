@@ -11,18 +11,32 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <encoding>UTF-8</encoding>
+    <postgresql.version>42.2.22</postgresql.version>
     <scala.version>2.12.12</scala.version>
     <scala.compat.version>2.12</scala.compat.version>
     <scopt.version>4.0.1</scopt.version>
+    <snowflake.version>2.11.2-spark_3.3</snowflake.version>
     <spark.version>3.3.0</spark.version>
     <spec2.version>4.2.0</spec2.version>
   </properties>
 
   <dependencies>
     <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>${postgresql.version}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
       <groupId>org.scala-lang</groupId>
       <artifactId>scala-library</artifactId>
       <version>${scala.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.github.scopt</groupId>
+      <artifactId>scopt_${scala.compat.version}</artifactId>
+      <version>${scopt.version}</version>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.spark</groupId>
@@ -37,9 +51,9 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>com.github.scopt</groupId>
-      <artifactId>scopt_${scala.compat.version}</artifactId>
-      <version>${scopt.version}</version>
+      <groupId>net.snowflake</groupId>
+      <artifactId>spark-snowflake_${scala.compat.version}</artifactId>
+      <version>${snowflake.version}</version>
       <scope>compile</scope>
     </dependency>
 
