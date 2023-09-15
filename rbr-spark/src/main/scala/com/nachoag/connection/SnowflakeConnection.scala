@@ -5,7 +5,7 @@ import com.nachoag.service.spark.Session
 import net.snowflake.client.jdbc.SnowflakeSQLException
 import org.apache.spark.sql.{DataFrame, SaveMode}
 
-case class SnowflakeConnection(url: String, user: String, password: String, warehouse: String, tag: String) extends Connection {
+case class SnowflakeConnection(url: String, user: String, password: String, warehouse: String, tag: String) {
 
   private object ErrorCodes {
     val NOT_EXIST_OR_NOT_AUTHORIZED = 2003
@@ -21,8 +21,8 @@ case class SnowflakeConnection(url: String, user: String, password: String, ware
     "preactions" -> s"alter session set query_tag='$tag'",
   )
 
-  override def read(table: Repository): DataFrame = {
-    val tableOptions = optionsFromTable(table)
+  def read(repository: Repository): DataFrame = {
+    val tableOptions = optionsFromTable(repository)
 
     Session.getSession
       .sqlContext.read
@@ -32,14 +32,14 @@ case class SnowflakeConnection(url: String, user: String, password: String, ware
       .load()
   }
 
-  override def write(df: DataFrame, table: Repository): Unit = {
+  def write(df: DataFrame, repository: Repository): Unit = {
     def handle(e: SnowflakeSQLException): Unit = e.getErrorCode match {
       case ErrorCodes.NOT_EXIST_OR_NOT_AUTHORIZED => throw e
       case ErrorCodes.INSUFFICIENT_PRIVILEDGES => throw e
       case _ => throw e
     }
 
-    val tableOptions = optionsFromTable(table)
+    val tableOptions = optionsFromTable(repository)
     try {
       df.write
         .format(FORMAT)
@@ -58,7 +58,7 @@ case class SnowflakeConnection(url: String, user: String, password: String, ware
   }
 
   private def optionsFromTable(table: Repository): Map[String, String] = {
-    val (db, schema, name) = table.entity.path.name.split(".")
+    val Array(db, schema, name) = table.entity.path.name.split(".")
     Map("sfDatabase" -> db, "sfSchema" -> schema, "dbtable" -> name)
   }
 }

@@ -1,9 +1,10 @@
 package com.nachoag.connection
+
 import com.nachoag.persistence.Repository
 import com.nachoag.service.spark.Session
 import org.apache.spark.sql.{DataFrame, SaveMode}
 
-case class PostgreConnection(url: String, user: String, password: String, driver: String) extends Connection {
+case class PostgreConnection(url: String, user: String, password: String, driver: String)  {
 
   val FORMAT = "jdbc"
   val OPTIONS = Map(
@@ -13,8 +14,8 @@ case class PostgreConnection(url: String, user: String, password: String, driver
     "password" -> password
   )
 
-  override def read(table: Repository): DataFrame = {
-    val tableOptions = optionsFromTable(table)
+  def read(repository: Repository): DataFrame = {
+    val tableOptions = optionsFromTable(repository)
     Session.getSession
       .sqlContext.read
       .format(FORMAT)
@@ -23,8 +24,8 @@ case class PostgreConnection(url: String, user: String, password: String, driver
       .load()
   }
 
-  override def write(df: DataFrame, table: Repository): Unit = {
-    val tableOptions = optionsFromTable(table)
+  def write(df: DataFrame, repository: Repository): Unit = {
+    val tableOptions = optionsFromTable(repository)
     df.write
       .format(FORMAT)
       .options(OPTIONS)

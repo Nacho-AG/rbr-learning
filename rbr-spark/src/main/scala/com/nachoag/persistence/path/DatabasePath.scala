@@ -1,5 +1,7 @@
 package com.nachoag.persistence.path
 
+import com.nachoag.persistence.Path
+
 case class DatabasePath(name: String, db: String = null, schema: String = null) extends Path {
   override def toString: String = (db, schema) match {
     case ("", _) => s"$schema.$name"

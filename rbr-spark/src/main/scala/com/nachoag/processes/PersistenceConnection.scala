@@ -2,7 +2,7 @@ package com.nachoag.processes
 
 import com.nachoag.persistence._
 import com.nachoag.persistence.field.{Field, FieldMetadata}
-import com.nachoag.persistence.path.{DatabasePath, Path}
+import com.nachoag.persistence.path.DatabasePath
 import com.nachoag.service.spark.DataFrameCreator
 import org.apache.spark.sql.types.{LongType, StructField, StructType}
 import org.apache.spark.sql.{DataFrame, Row}
