@@ -1,6 +1,7 @@
 package com.nachoag
 
 import com.nachoag.exceptions.SparkAppException
+import org.apache.log4j.{Level, LogManager}
 
 object App {
   
@@ -12,7 +13,13 @@ object App {
   }
 
   private def execute(args: Arguments): Unit = {
+    configureLogs()
     Orchestrator.launch(args.process)
+  }
+
+  private def configureLogs(): Unit = {
+    val logManager = LogManager.getRootLogger
+    logManager.setLevel(Level.WARN)
   }
 
 }

@@ -11,7 +11,11 @@ object DataFramePlayground extends SparkAppProcess {
 
   override def execute(): Unit = {
     val df = createRandomDataFrame()
+
+    println("Randomly generated DataFrame")
     df.show(numRows = df.count.toInt, truncate = false)
+
+    println("First row of the data")
     df.show(numRows = 1, truncate = 140, vertical = true)
   }
 
