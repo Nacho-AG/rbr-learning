@@ -1,6 +1,7 @@
-package com.nachoag.processes
+package com.nachoag.processes.b
 
-import com.nachoag.service.spark.{Configurator, Session}
+import com.nachoag.processes.SparkAppProcess
+import com.nachoag.service.spark.Configurator
 
 object SessionConfiguration extends SparkAppProcess {
 

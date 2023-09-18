@@ -1,12 +1,13 @@
-package com.nachoag.processes
+package com.nachoag.processes.c
 
+import com.nachoag.processes.SparkAppProcess
 import com.nachoag.service.spark.DataFrameCreator
 import org.apache.spark.sql.types._
 import org.apache.spark.sql.{DataFrame, Row}
 
 import scala.util.Random
 
-object DataFrameCreation extends SparkAppProcess {
+object DataFramePlayground extends SparkAppProcess {
 
   override def execute(): Unit = {
     val df = createRandomDataFrame()
